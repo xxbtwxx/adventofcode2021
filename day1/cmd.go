@@ -9,3 +9,21 @@ var Cmd = &cobra.Command{
 		cmd.Help()
 	},
 }
+
+func init() {
+	Cmd.AddCommand(&cobra.Command{
+		Use:   "a",
+		Short: "Solution for day 1 problem A",
+		Run: func(cmd *cobra.Command, args []string) {
+			task(1)
+		},
+	})
+
+	Cmd.AddCommand(&cobra.Command{
+		Use:   "b",
+		Short: "Solution for day 1 problem B",
+		Run: func(cmd *cobra.Command, args []string) {
+			task(3)
+		},
+	})
+}

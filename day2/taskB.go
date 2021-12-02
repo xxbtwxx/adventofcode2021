@@ -19,9 +19,7 @@ func init() {
 func taskB() {
 	forward, depth, aim := 0, 0, 0
 
-	commands := commandReader()
-
-	for command := range commands {
+	for command := range commandReader() {
 		switch command.direction {
 		case "forward":
 			forward += command.value

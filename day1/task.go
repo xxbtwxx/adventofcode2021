@@ -2,28 +2,12 @@ package day1
 
 import (
 	"fmt"
-
-	"github.com/spf13/cobra"
 )
 
-func init() {
-	Cmd.AddCommand(&cobra.Command{
-		Use:   "b",
-		Short: "Solution for day 1 problem B",
-		Run: func(cmd *cobra.Command, args []string) {
-			taskB()
-		},
-	})
-}
-
-const sumSize = 3
-
-func taskB() {
-	depthValues := depthReader()
-
+func task(sumSize int) {
 	elements := make([]int, 0, sumSize+1)
 	increments := 0
-	for depthValue := range depthValues {
+	for depthValue := range depthReader() {
 		elements = append(elements, depthValue)
 		if len(elements) < sumSize+1 {
 			continue
