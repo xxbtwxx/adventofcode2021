@@ -2,6 +2,7 @@ package main
 
 import (
 	"adventofcode2021/day1"
+	"adventofcode2021/day2"
 	"os"
 
 	"github.com/spf13/cobra"
@@ -17,6 +18,7 @@ var rootCmd = cobra.Command{
 
 func init() {
 	rootCmd.AddCommand(day1.Cmd)
+	rootCmd.AddCommand(day2.Cmd)
 }
 
 func main() {
