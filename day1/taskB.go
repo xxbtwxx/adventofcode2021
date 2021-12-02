@@ -16,18 +16,20 @@ func init() {
 	})
 }
 
+const sumSize = 3
+
 func taskB() {
 	depthValues := depthReader()
 
-	elements := make([]int, 0, 4)
+	elements := make([]int, 0, sumSize+1)
 	increments := 0
 	for depthValue := range depthValues {
 		elements = append(elements, depthValue)
-		if len(elements) < 4 {
+		if len(elements) < sumSize+1 {
 			continue
 		}
 
-		if sum(elements[:len(elements)-1]) < sum(elements[1:]) {
+		if elements[0] < elements[len(elements)-1] {
 			increments++
 		}
 
@@ -35,12 +37,4 @@ func taskB() {
 	}
 
 	fmt.Println(increments)
-}
-
-func sum(elements []int) (s int) {
-	for _, el := range elements {
-		s += el
-	}
-
-	return
 }
