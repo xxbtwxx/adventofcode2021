@@ -43,8 +43,8 @@ func taskB() {
 }
 
 func calculateO2(reports []string, index int) string {
-	if index == reportLength-1 {
-		return reports[len(reports)-1]
+	if index == reportLength {
+		return reports[0]
 	}
 
 	zeroesCount := 0
@@ -54,7 +54,7 @@ func calculateO2(reports []string, index int) string {
 		}
 	}
 
-	if zeroesCount >= len(reports)-zeroesCount {
+	if zeroesCount > len(reports)-zeroesCount {
 		if len(reports[:zeroesCount]) == 0 {
 			return calculateO2(reports[zeroesCount:], index+1)
 		}
@@ -68,7 +68,7 @@ func calculateO2(reports []string, index int) string {
 }
 
 func calculateCO2(reports []string, index int) string {
-	if index == reportLength-1 {
+	if index == reportLength {
 		return reports[0]
 	}
 
