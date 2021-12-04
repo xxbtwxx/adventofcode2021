@@ -8,11 +8,6 @@ import (
 
 const reportLength = 12
 
-var runeToVal = map[rune]int{
-	'0': 0,
-	'1': 1,
-}
-
 func reportReader() <-chan string {
 	reports := make(chan string)
 

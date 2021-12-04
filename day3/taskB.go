@@ -26,18 +26,10 @@ func taskB() {
 	sort.Strings(reports)
 
 	o2Reading := calculateO2(reports, 0)
-	o2Level := 0
-	for _, val := range o2Reading {
-		o2Level = o2Level << 1
-		o2Level += runeToVal[val]
-	}
+	o2Level := binaryStringToInt(o2Reading)
 
 	co2Reading := calculateCO2(reports, 0)
-	co2Level := 0
-	for _, val := range co2Reading {
-		co2Level = co2Level << 1
-		co2Level += runeToVal[val]
-	}
+	co2Level := binaryStringToInt(co2Reading)
 
 	fmt.Println(co2Level * o2Level)
 }

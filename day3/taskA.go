@@ -35,17 +35,8 @@ func taskA() {
 		}
 	}
 
-	gammaValue := 0
-	for _, vals := range gammaValues {
-		gammaValue = gammaValue << 1
-		gammaValue += vals
-	}
-
-	epsilonValue := 0
-	for _, vals := range epsilonValues {
-		epsilonValue = epsilonValue << 1
-		epsilonValue += vals
-	}
+	gammaValue := binaryIntSliceToInt(gammaValues[:])
+	epsilonValue := binaryIntSliceToInt(epsilonValues[:])
 
 	fmt.Println(gammaValue * epsilonValue)
 }
