@@ -40,7 +40,7 @@ func inputReader() (<-chan int, map[int]*bingoCard) {
 
 	scanner.Scan()
 
-	cardValues := [5][5]int{}
+	cardValues := [rows][columns]int{}
 	row := 0
 	for scanner.Scan() {
 		line := scanner.Text()
@@ -52,7 +52,7 @@ func inputReader() (<-chan int, map[int]*bingoCard) {
 		line = strings.Trim(line, " ")
 
 		rowValues := strings.Split(line, " ")
-		rowVals := [5]int{}
+		rowVals := [columns]int{}
 		for index, value := range rowValues {
 			numValue, err := strconv.Atoi(value)
 			if err != nil {
@@ -66,7 +66,7 @@ func inputReader() (<-chan int, map[int]*bingoCard) {
 		cardValues[row] = rowVals
 
 		row++
-		if row == 5 {
+		if row == rows {
 			cards[len(cards)+1] = initializeCard(cardValues)
 			row = 0
 		}

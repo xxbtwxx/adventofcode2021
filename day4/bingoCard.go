@@ -1,9 +1,14 @@
 package day4
 
+const (
+	rows    = 5
+	columns = 5
+)
+
 type bingoCard struct {
 	values       map[int]*valueMetadata
-	rowsDrawn    [5]int
-	columnsDrawn [5]int
+	rowsDrawn    [rows]int
+	columnsDrawn [columns]int
 	isBingo      bool
 }
 
@@ -13,11 +18,11 @@ type valueMetadata struct {
 	drawn     bool
 }
 
-func initializeCard(cardValues [5][5]int) *bingoCard {
+func initializeCard(cardValues [rows][columns]int) *bingoCard {
 	bc := &bingoCard{
 		values:       map[int]*valueMetadata{},
-		rowsDrawn:    [5]int{},
-		columnsDrawn: [5]int{},
+		rowsDrawn:    [rows]int{},
+		columnsDrawn: [columns]int{},
 	}
 
 	for row, rowValues := range cardValues {
@@ -41,12 +46,12 @@ func (bc *bingoCard) mark(val int) {
 	value.drawn = true
 
 	bc.rowsDrawn[value.posRow]++
-	if bc.rowsDrawn[value.posRow] == 5 {
+	if bc.rowsDrawn[value.posRow] == rows {
 		bc.isBingo = true
 	}
 
 	bc.columnsDrawn[value.posColumn]++
-	if bc.columnsDrawn[value.posColumn] == 5 {
+	if bc.columnsDrawn[value.posColumn] == columns {
 		bc.isBingo = true
 	}
 }
