@@ -19,24 +19,16 @@ func init() {
 
 func taskA() {
 	crabsAtPosition := map[int]int{}
-	minPos := math.MaxInt64
-	maxPos := math.MinInt64
-
 	for pos := range positionReader() {
 		crabsAtPosition[pos]++
-		if pos > maxPos {
-			maxPos = pos
-		} else if pos < minPos {
-			minPos = pos
-		}
+
 	}
 
 	minFuel := math.MaxInt64
-
-	for i := minPos; i < maxPos; i++ {
+	for crabPosition := range crabsAtPosition {
 		currPosFuel := 0
 		for pos, count := range crabsAtPosition {
-			fuelCostToMove := (i - pos) * count
+			fuelCostToMove := (crabPosition - pos) * count
 			if fuelCostToMove < 0 {
 				fuelCostToMove *= -1
 			}
