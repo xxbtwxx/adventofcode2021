@@ -45,101 +45,101 @@ func isSubset(subset, set string) bool {
 func taskB() {
 	sum := 0
 	for input := range inputParser() {
-		discoveredPatterns := map[string]int{}
+		patternToValue := map[string]int{}
 		valueToPattern := map[int]string{}
-		undiscoveredPatterns := map[string]struct{}{}
+		unpatternToValue := map[string]struct{}{}
 
 		for _, pattern := range input.patterns {
-			undiscoveredPatterns[sortString(pattern)] = struct{}{}
+			unpatternToValue[sortString(pattern)] = struct{}{}
 		}
 
 		// first pass, discover unique digits
-		for pattern := range undiscoveredPatterns {
+		for pattern := range unpatternToValue {
 			switch len(pattern) {
 			case 2:
-				discoveredPatterns[pattern] = 1
+				patternToValue[pattern] = 1
 				valueToPattern[1] = pattern
-				delete(undiscoveredPatterns, pattern)
+				delete(unpatternToValue, pattern)
 			case 3:
-				discoveredPatterns[pattern] = 7
+				patternToValue[pattern] = 7
 				valueToPattern[7] = pattern
-				delete(undiscoveredPatterns, pattern)
+				delete(unpatternToValue, pattern)
 			case 4:
-				discoveredPatterns[pattern] = 4
+				patternToValue[pattern] = 4
 				valueToPattern[4] = pattern
-				delete(undiscoveredPatterns, pattern)
+				delete(unpatternToValue, pattern)
 			case 7:
-				discoveredPatterns[pattern] = 8
+				patternToValue[pattern] = 8
 				valueToPattern[8] = pattern
-				delete(undiscoveredPatterns, pattern)
+				delete(unpatternToValue, pattern)
 			}
 		}
 
 		// discover 0
-		for pattern := range undiscoveredPatterns {
+		for pattern := range unpatternToValue {
 			if isSubset(pattern, valueToPattern[8]) && isSubset(valueToPattern[7], pattern) && !isSubset(valueToPattern[4], pattern) && !isSubset(pattern, valueToPattern[4]) && len(pattern) == 6 {
-				discoveredPatterns[pattern] = 0
+				patternToValue[pattern] = 0
 				valueToPattern[0] = pattern
-				delete(undiscoveredPatterns, pattern)
+				delete(unpatternToValue, pattern)
 				break
 			}
 		}
 
 		// discover 9
-		for pattern := range undiscoveredPatterns {
+		for pattern := range unpatternToValue {
 			if isSubset(valueToPattern[7], pattern) && isSubset(valueToPattern[4], pattern) && !isSubset(pattern, valueToPattern[0]) && !isSubset(valueToPattern[0], pattern) {
-				discoveredPatterns[pattern] = 9
+				patternToValue[pattern] = 9
 				valueToPattern[9] = pattern
-				delete(undiscoveredPatterns, pattern)
+				delete(unpatternToValue, pattern)
 				break
 			}
 		}
 
 		// discover 6
-		for pattern := range undiscoveredPatterns {
+		for pattern := range unpatternToValue {
 			if len(pattern) == 6 {
-				discoveredPatterns[pattern] = 6
+				patternToValue[pattern] = 6
 				valueToPattern[6] = pattern
-				delete(undiscoveredPatterns, pattern)
+				delete(unpatternToValue, pattern)
 				break
 			}
 		}
 
 		// discover 3
-		for pattern := range undiscoveredPatterns {
+		for pattern := range unpatternToValue {
 			if isSubset(valueToPattern[1], pattern) {
-				discoveredPatterns[pattern] = 3
+				patternToValue[pattern] = 3
 				valueToPattern[3] = pattern
-				delete(undiscoveredPatterns, pattern)
+				delete(unpatternToValue, pattern)
 				break
 			}
 		}
 
 		// discover 5
-		for pattern := range undiscoveredPatterns {
+		for pattern := range unpatternToValue {
 			if isSubset(pattern, valueToPattern[6]) {
-				discoveredPatterns[pattern] = 5
+				patternToValue[pattern] = 5
 				valueToPattern[5] = pattern
-				delete(undiscoveredPatterns, pattern)
+				delete(unpatternToValue, pattern)
 				break
 			}
 		}
 
 		// discover 2
-		if len(undiscoveredPatterns) != 1 {
+		if len(unpatternToValue) != 1 {
 			fmt.Println("unexpected case")
 			return
 		}
 
-		for pattern := range undiscoveredPatterns {
-			discoveredPatterns[pattern] = 2
+		for pattern := range unpatternToValue {
+			patternToValue[pattern] = 2
 			valueToPattern[2] = pattern
-			delete(undiscoveredPatterns, pattern)
+			delete(unpatternToValue, pattern)
 		}
 
 		mutliplier := 1000
 		for _, signal := range input.signal {
-			sum += discoveredPatterns[sortString(signal)] * mutliplier
+			sum += patternToValue[sortString(signal)] * mutliplier
 			mutliplier /= 10
 		}
 	}
