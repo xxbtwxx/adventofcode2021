@@ -47,7 +47,7 @@ func taskB() {
 	for input := range inputParser() {
 		patternToValue := map[string]int{}
 		valueToPattern := map[int]string{}
-		undiscoveredPatternsToValue := map[string]struct{}{}
+		undiscoveredPatterns := map[string]struct{}{}
 
 		for _, pattern := range input.patterns {
 			pattern = sortString(pattern)
@@ -65,70 +65,70 @@ func taskB() {
 				patternToValue[pattern] = 8
 				valueToPattern[8] = pattern
 			default:
-				undiscoveredPatternsToValue[pattern] = struct{}{}
+				undiscoveredPatterns[pattern] = struct{}{}
 			}
 		}
 
 		// discover 0
-		for pattern := range undiscoveredPatternsToValue {
+		for pattern := range undiscoveredPatterns {
 			if isSubset(pattern, valueToPattern[8]) && isSubset(valueToPattern[7], pattern) && !isSubset(valueToPattern[4], pattern) && !isSubset(pattern, valueToPattern[4]) && len(pattern) == 6 {
 				patternToValue[pattern] = 0
 				valueToPattern[0] = pattern
-				delete(undiscoveredPatternsToValue, pattern)
+				delete(undiscoveredPatterns, pattern)
 				break
 			}
 		}
 
 		// discover 9
-		for pattern := range undiscoveredPatternsToValue {
+		for pattern := range undiscoveredPatterns {
 			if isSubset(valueToPattern[7], pattern) && isSubset(valueToPattern[4], pattern) && !isSubset(pattern, valueToPattern[0]) && !isSubset(valueToPattern[0], pattern) {
 				patternToValue[pattern] = 9
 				valueToPattern[9] = pattern
-				delete(undiscoveredPatternsToValue, pattern)
+				delete(undiscoveredPatterns, pattern)
 				break
 			}
 		}
 
 		// discover 6
-		for pattern := range undiscoveredPatternsToValue {
+		for pattern := range undiscoveredPatterns {
 			if len(pattern) == 6 {
 				patternToValue[pattern] = 6
 				valueToPattern[6] = pattern
-				delete(undiscoveredPatternsToValue, pattern)
+				delete(undiscoveredPatterns, pattern)
 				break
 			}
 		}
 
 		// discover 3
-		for pattern := range undiscoveredPatternsToValue {
+		for pattern := range undiscoveredPatterns {
 			if isSubset(valueToPattern[1], pattern) {
 				patternToValue[pattern] = 3
 				valueToPattern[3] = pattern
-				delete(undiscoveredPatternsToValue, pattern)
+				delete(undiscoveredPatterns, pattern)
 				break
 			}
 		}
 
 		// discover 5
-		for pattern := range undiscoveredPatternsToValue {
+		for pattern := range undiscoveredPatterns {
 			if isSubset(pattern, valueToPattern[6]) {
 				patternToValue[pattern] = 5
 				valueToPattern[5] = pattern
-				delete(undiscoveredPatternsToValue, pattern)
+				delete(undiscoveredPatterns, pattern)
 				break
 			}
 		}
 
 		// discover 2
-		if len(undiscoveredPatternsToValue) != 1 {
+		if len(undiscoveredPatterns) != 1 {
 			fmt.Println("unexpected case")
 			return
 		}
 
-		for pattern := range undiscoveredPatternsToValue {
+		for pattern := range undiscoveredPatterns {
 			patternToValue[pattern] = 2
 			valueToPattern[2] = pattern
-			delete(undiscoveredPatternsToValue, pattern)
+			delete(undiscoveredPatterns, pattern)
 		}
 
 		mutliplier := 1000
