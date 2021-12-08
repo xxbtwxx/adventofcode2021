@@ -19,8 +19,8 @@ func init() {
 func taskA() {
 	simpleDigits := 0
 	for input := range inputParser() {
-		for _, digit := range input.digits {
-			switch len(digit) {
+		for _, signal := range input.signal {
+			switch len(signal) {
 			case 2, 3, 4, 7:
 				simpleDigits++
 			}
@@ -29,5 +29,4 @@ func taskA() {
 	}
 
 	fmt.Println(simpleDigits)
-
 }

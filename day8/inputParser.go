@@ -9,7 +9,7 @@ import (
 
 type input struct {
 	patterns []string
-	digits   []string
+	signal   []string
 }
 
 func inputParser() <-chan input {
@@ -37,10 +37,10 @@ func inputParser() <-chan input {
 
 			input := input{
 				patterns: strings.Split(splitedLine[0], " "),
-				digits:   strings.Split(splitedLine[1], " "),
+				signal:   strings.Split(splitedLine[1], " "),
 			}
 
-			if len(input.patterns) != 10 || len(input.digits) != 4 {
+			if len(input.patterns) != 10 || len(input.signal) != 4 {
 				fmt.Println("malformed input")
 				return
 			}
