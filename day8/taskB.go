@@ -50,28 +50,22 @@ func taskB() {
 		undiscoveredPatternsToValue := map[string]struct{}{}
 
 		for _, pattern := range input.patterns {
-			undiscoveredPatternsToValue[sortString(pattern)] = struct{}{}
-		}
-
-		// first pass, discover unique digits
-		for pattern := range undiscoveredPatternsToValue {
+			pattern = sortString(pattern)
 			switch len(pattern) {
 			case 2:
 				patternToValue[pattern] = 1
 				valueToPattern[1] = pattern
-				delete(undiscoveredPatternsToValue, pattern)
 			case 3:
 				patternToValue[pattern] = 7
 				valueToPattern[7] = pattern
-				delete(undiscoveredPatternsToValue, pattern)
 			case 4:
 				patternToValue[pattern] = 4
 				valueToPattern[4] = pattern
-				delete(undiscoveredPatternsToValue, pattern)
 			case 7:
 				patternToValue[pattern] = 8
 				valueToPattern[8] = pattern
-				delete(undiscoveredPatternsToValue, pattern)
+			default:
+				undiscoveredPatternsToValue[pattern] = struct{}{}
 			}
 		}
 
