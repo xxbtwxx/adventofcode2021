@@ -56,26 +56,3 @@ func getSortedAdjecent(m [][]int, x, y int) []int {
 	sort.Ints(adjecent)
 	return adjecent
 }
-
-func adjecentCoords(m [][]int, x, y int) []coords {
-	adjecent := []coords{}
-
-	adjecentPairs := map[coords]struct{}{
-		{x: x + 1, y: y}: {},
-		{x: x - 1, y: y}: {},
-		{x: x, y: y + 1}: {},
-		{x: x, y: y - 1}: {},
-	}
-
-	for coord := range adjecentPairs {
-		if coord.x < 0 || coord.x >= len(m[y]) || coord.y < 0 || coord.y >= len(m) {
-			delete(adjecentPairs, coord)
-		}
-	}
-
-	for pair := range adjecentPairs {
-		adjecent = append(adjecent, pair)
-	}
-
-	return adjecent
-}

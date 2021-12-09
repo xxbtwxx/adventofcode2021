@@ -35,14 +35,14 @@ func taskB() {
 	for _, coord := range lowCoords {
 		regionSize := 1
 		iteratedOver[coord] = struct{}{}
-		adjecent := adjecentCoords(floorMap, coord.x, coord.y)
+		adjecent := adjecentCoords(floorMap, iteratedOver, coord.x, coord.y)
 		for len(adjecent) != 0 {
 			adjecentCoord := adjecent[0]
 			adjecent = adjecent[1:]
 			if _, ok := iteratedOver[adjecentCoord]; !ok && floorMap[adjecentCoord.y][adjecentCoord.x] != 9 {
 				iteratedOver[adjecentCoord] = struct{}{}
 				regionSize++
-				adjecent = append(adjecent, adjecentCoords(floorMap, adjecentCoord.x, adjecentCoord.y)...)
+				adjecent = append(adjecent, adjecentCoords(floorMap, iteratedOver, adjecentCoord.x, adjecentCoord.y)...)
 			}
 		}
 
@@ -52,4 +52,29 @@ func taskB() {
 	sort.Ints(regionsSize)
 	regionsMult := regionsSize[len(regionsSize)-1] * regionsSize[len(regionsSize)-2] * regionsSize[len(regionsSize)-3]
 	fmt.Println(regionsMult)
+}
+
+func adjecentCoords(m [][]int, iterated map[coords]struct{}, x, y int) []coords {
+	adjecent := []coords{}
+
+	adjecentPairs := map[coords]struct{}{
+		{x: x + 1, y: y}: {},
+		{x: x - 1, y: y}: {},
+		{x: x, y: y + 1}: {},
+		{x: x, y: y - 1}: {},
+	}
+
+	for coord := range adjecentPairs {
+		if coord.x < 0 || coord.x >= len(m[y]) || coord.y < 0 || coord.y >= len(m) {
+			delete(adjecentPairs, coord)
+		}
+	}
+
+	for pair := range adjecentPairs {
+		if _, ok := iterated[pair]; !ok {
+			adjecent = append(adjecent, pair)
+		}
+	}
+
+	return adjecent
 }
