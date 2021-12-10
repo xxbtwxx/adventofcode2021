@@ -39,7 +39,7 @@ func taskB() {
 		for len(adjecent) != 0 {
 			adjecentCoord := adjecent[0]
 			adjecent = adjecent[1:]
-			if _, ok := iteratedOver[adjecentCoord]; !ok && floorMap[adjecentCoord.y][adjecentCoord.x] != 9 {
+			if _, ok := iteratedOver[adjecentCoord]; !ok {
 				iteratedOver[adjecentCoord] = struct{}{}
 				regionSize++
 				adjecent = append(adjecent, adjecentCoords(floorMap, iteratedOver, adjecentCoord.x, adjecentCoord.y)...)
@@ -71,7 +71,7 @@ func adjecentCoords(m [][]int, iterated map[coords]struct{}, x, y int) []coords 
 	}
 
 	for pair := range adjecentPairs {
-		if _, ok := iterated[pair]; !ok {
+		if _, ok := iterated[pair]; !ok && m[pair.y][pair.x] != 9 {
 			adjecent = append(adjecent, pair)
 		}
 	}
