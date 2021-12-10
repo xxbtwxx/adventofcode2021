@@ -1,16 +1,16 @@
 package main
 
 import (
-	"adventofcode2021/day1"
+	"adventofcode2021/day01"
+	"adventofcode2021/day02"
+	"adventofcode2021/day03"
+	"adventofcode2021/day04"
+	"adventofcode2021/day05"
+	"adventofcode2021/day06"
+	"adventofcode2021/day07"
+	"adventofcode2021/day08"
+	"adventofcode2021/day09"
 	"adventofcode2021/day10"
-	"adventofcode2021/day2"
-	"adventofcode2021/day3"
-	"adventofcode2021/day4"
-	"adventofcode2021/day5"
-	"adventofcode2021/day6"
-	"adventofcode2021/day7"
-	"adventofcode2021/day8"
-	"adventofcode2021/day9"
 	"os"
 
 	"github.com/spf13/cobra"
@@ -25,15 +25,15 @@ var rootCmd = cobra.Command{
 }
 
 func init() {
-	rootCmd.AddCommand(day1.Cmd)
-	rootCmd.AddCommand(day2.Cmd)
-	rootCmd.AddCommand(day3.Cmd)
-	rootCmd.AddCommand(day4.Cmd)
-	rootCmd.AddCommand(day5.Cmd)
-	rootCmd.AddCommand(day6.Cmd)
-	rootCmd.AddCommand(day7.Cmd)
-	rootCmd.AddCommand(day8.Cmd)
-	rootCmd.AddCommand(day9.Cmd)
+	rootCmd.AddCommand(day01.Cmd)
+	rootCmd.AddCommand(day02.Cmd)
+	rootCmd.AddCommand(day03.Cmd)
+	rootCmd.AddCommand(day04.Cmd)
+	rootCmd.AddCommand(day05.Cmd)
+	rootCmd.AddCommand(day06.Cmd)
+	rootCmd.AddCommand(day07.Cmd)
+	rootCmd.AddCommand(day08.Cmd)
+	rootCmd.AddCommand(day09.Cmd)
 	rootCmd.AddCommand(day10.Cmd)
 }
 

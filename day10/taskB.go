@@ -10,7 +10,7 @@ import (
 func init() {
 	Cmd.AddCommand(&cobra.Command{
 		Use:   "b",
-		Short: "Solution for day 10 problem B",
+		Short: "Solution for day10 problem B",
 		Run: func(cmd *cobra.Command, args []string) {
 			taskB()
 		},
