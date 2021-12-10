@@ -2,6 +2,7 @@ package main
 
 import (
 	"adventofcode2021/day1"
+	"adventofcode2021/day10"
 	"adventofcode2021/day2"
 	"adventofcode2021/day3"
 	"adventofcode2021/day4"
@@ -33,6 +34,7 @@ func init() {
 	rootCmd.AddCommand(day7.Cmd)
 	rootCmd.AddCommand(day8.Cmd)
 	rootCmd.AddCommand(day9.Cmd)
+	rootCmd.AddCommand(day10.Cmd)
 }
 
 func main() {
