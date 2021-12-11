@@ -11,6 +11,7 @@ import (
 	"adventofcode2021/day08"
 	"adventofcode2021/day09"
 	"adventofcode2021/day10"
+	"adventofcode2021/day11"
 	"os"
 
 	"github.com/spf13/cobra"
@@ -35,6 +36,7 @@ func init() {
 	rootCmd.AddCommand(day08.Cmd)
 	rootCmd.AddCommand(day09.Cmd)
 	rootCmd.AddCommand(day10.Cmd)
+	rootCmd.AddCommand(day11.Cmd)
 }
 
 func main() {
